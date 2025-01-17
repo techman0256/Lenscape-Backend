@@ -8,7 +8,13 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   get "/profile" => "users#index"
-  get "/stories" => "stories#index"
+
+  # to send suggestion to follow other users
+  post "/profile/suggestions" => "users#suggestions"
+  post "profile/follows" =>  "users#follows"
+  delete "profile/unfollows" => "users#unfollows"
+
+  post "/stories/fetch" => "stories#index"
   post "/stories" => "stories#create"
 
   get "/auth" => "sessions#verify"

@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
         render json: { error: 'Invalid username or password' }, status: :unauthorized
       end
     end
+
     def verify
       token = request.headers['Authorization'].to_s
       puts token
