@@ -1,10 +1,21 @@
 class StoriesController < ApplicationController
-    def index
-      # Fetch stories posted in the last 24 hours
-      stories = Story.where(:created_at.gte => 180.minutes.ago)
-      puts stories
-      render json: stories
-    end
+  def index
+    # Assuming A (the current user) is available in the session or params
+    current_user = Profile.find_by(username: params[:username]) # Replace `params[:current_user]` with how you get the current user
+    follows = current_user.follows
+    
+    # Fetch stories from users A follows
+    # puts "reached till here #{follows}"
+    # stories = Story.where(username: follows, created_at: { gte: 168.hours.ago })
+
+    stories = Story.where(:username.in => follows << current_user.username, :created_at.gte => 168.hours.ago)
+
+
+    
+    puts "These are stories #{stories}"
+    render json: stories
+  end
+  
   
     def create
       puts "helllooooooooo #{params[:urls].class}"

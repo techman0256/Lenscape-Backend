@@ -27,4 +27,7 @@ Rails.application.routes.draw do
   post '/account/:username' => 'profiles#create'
   put '/account/:username' => 'profiles#update'
 
+  post "/post" => "posts#create" 
+  post "/post/fetch" => "posts#index"
+
 end
